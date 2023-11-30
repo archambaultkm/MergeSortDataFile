@@ -10,6 +10,21 @@
 
 #include <string>
 
+inline bool is_int(char* char_p) {
+    size_t pos;
+    int int_val = std::stoi(char_p, &pos);
+    if (pos != std::strlen(char_p)) {
+
+        return false;
+    }
+
+    return true;
+}
+
+inline bool is_positive(const char* char_p) {
+    return std::stoi(char_p) > 0;
+}
+
 inline std::variant<float, std::string> convert_to_variant(const std::string& value) {
     try {
         size_t pos; // position of first char that couldn't be converted to an integer

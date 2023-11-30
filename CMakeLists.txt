@@ -9,9 +9,8 @@ add_executable(merge
         inc/timer.h
         inc/utils.h
         src/utils.cpp
-        inc/queue.h
-        inc/queue.h
-        inc/linked_list.h
         inc/entity.h
         src/entity_file_processor.cpp
-        inc/entity_file_processor.h)
+        inc/entity_file_processor.h
+        inc/merge_sort.h
+        src/merge_sort.cpp)

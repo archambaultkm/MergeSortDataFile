@@ -1,2 +1,0 @@
-W00000001	Smith	Bob	123 Street Rd.	Halifax	NS	H0H 0H0	555-1212	M	32	3	office	N	28.75
-W12345678	Doe	Jane	555 Road St.	London	ON	A9A 9A9	555-1313	F	27	0	factory	Y	19.50

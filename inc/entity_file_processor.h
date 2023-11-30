@@ -12,16 +12,13 @@
 
 class EntityFileProcessor {
 private:
-    std::queue<Entity<int, std::string>> m_queue; // store every entity found in the file to memory
+     //std::ifstream m_in_file;
 
 public:
-    EntityFileProcessor() = default;
-    EntityFileProcessor(const std::string& file_name);
-    void read_from_file(const std::string& file_name, const char& delimiter);
-    void write_to_file(const std::string& file_name);
-    void sort_by_field(int field);
-    void print_queue(); // TODO replace with ostream operator
+    //EntityFileProcessor(const std::string& file_name, int sort_field, const char& delimiter);
+    //void save_to_file(const std::string& file_name);
+    //void merge_sort_by_field(int field);
+    //void sort(int field);
 };
-
 
 #endif //ASSIGNMENT4_ENTITY_FILE_PROCESSOR_H

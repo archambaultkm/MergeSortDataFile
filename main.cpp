@@ -2,9 +2,13 @@
 
 #include "inc/colours.h"
 #include "inc/utils.h"
-#include "inc/entity_file_processor.h"
+#include "inc/entity.h"
+#include "inc/merge_sort.h"
+#include "inc/timer.h"
 
-using namespace std;
+using std::string;
+using std::cout;
+using std::endl;
 
 // expected program arguments, used as feedback to the user
 const string EXPECTED_FORMAT = "\"./merge <filename>.txt -<field#>\"";
@@ -23,9 +27,18 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    EntityFileProcessor efp;
-    efp.read_from_file(argv[1], '\t');
-    efp.print_queue();
+    string file_to_sort = argv[1];
+    //sort::merge_sort<string>(file_to_sort);
+
+    Timer<> timer;
+    cout << "Starting sort..." << "\n";
+    timer.start();
+
+    sort::merge_sort<Entity<int, string>>(file_to_sort);
+
+    timer.stop();
+
+    cout << "Sort took " << timer.get_elapsed_time() << "ms. " << endl;
 
     return 0;
 }
@@ -47,7 +60,17 @@ bool valid_arguments(int argc, int expected_num_args, char* argv[], const string
         return false;
     }
 
-    // TODO check that argv[2] is a valid field#
+    if (!is_int(argv[2])) {
+        cout << "Invalid input: '" << argv[2] << "' is not a valid integer." << endl;
+
+        return false;
+    }
+
+    if (!is_positive(argv[2])) {
+        cout << "Invalid input: '" << argv[2] << "' must be a positive integer to represent the field to sort on." << endl;
+
+        return false;
+    }
 
     return true;
 }
