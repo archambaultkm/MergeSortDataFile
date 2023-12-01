@@ -1,2 +1,8 @@
-W6884522	Josefer	Caty	551 Bellgrove Alley	Nipawin	Saskatchewan	O7P 4R3	655-751-9283	Female	27	94	factory	true	90.09
-W3680879	Hurling	Teena	9 Melby Place	Greenwood	Nova Scotia	L6Y 2G7	147-113-5242	Female	97	11	office	false	9.96
+W4443872	Gantzman	Mareah	1 Maple Wood Hill	Drummondville	Québec	J3Z 1N5	788-404-0688	Female	68	36	factory	false	17.02	
+W0457349	Manueli	Ambrose	94803 Mccormick Alley	Lac-Mégantic	Québec	G4J 5Y2	772-537-4832	Non-binary	29	40	sales	true	4.33	
+W6984143	Dannatt	Bethany	587 Butternut Lane	Weyburn	Saskatchewan	B2L 0P9	319-343-7124	Female	11	25	office	true	58.48	
+W6420452	Skeene	Nehemiah	16134 Sommers Center	Mont-Saint-Hilaire	Québec	M1Q 8N0	580-664-9083	Male	35	53	factory	true	67.43	
+W1596569	Freer	Rad	09979 South Road	Saint John	New Brunswick	U5Y 3B1	702-240-8780	Male	78	69	factory	true	74.59	
+W3680879	Hurling	Teena	9 Melby Place	Greenwood	Nova Scotia	L6Y 2G7	147-113-5242	Female	97	11	office	false	9.96	
+W6884522	Josefer	Caty	551 Bellgrove Alley	Nipawin	Saskatchewan	O7P 4R3	655-751-9283	Female	27	94	factory	true	90.09	
+W9836949	Dunphie	Linnet	714 Eliot Pass	Minnedosa	Manitoba	Q5E 6S4	453-217-7341	Female	31	47	office	true	96.21	

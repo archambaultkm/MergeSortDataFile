@@ -12,7 +12,7 @@ template <typename KeyT, typename DataT>
 class Entity {
 private:
     std::map<KeyT, DataT> m_attributes;
-    int m_sort_field = 2;
+    int m_sort_field = 14;
 
 public:
     Entity() = default;
@@ -39,39 +39,44 @@ public:
         }
     }
 
-    // Comparison operator (<) based on m_sort_field
-    bool operator<(const Entity& other) const {
+    template <typename Compare>
+    bool compare_attributes(const Entity& other, Compare comp) const {
         try {
-            return get_attribute(m_sort_field) < other.get_attribute(m_sort_field);
+            return comp(get_attribute(m_sort_field), other.get_attribute(m_sort_field));
         } catch (const std::out_of_range&) {
             // Consider uninitialized entities, or those without data at that key, less than
             return true;
         }
     }
 
+    // Comparison operator (<) based on m_sort_field
+    bool operator<(const Entity& other) const {
+        return compare_attributes(other, std::less<DataT>());
+    }
+
     // Comparison operator (<=) based on m_sort_field
     bool operator<=(const Entity& other) const {
-        return get_attribute(m_sort_field) <= other.get_attribute(m_sort_field);
+        return compare_attributes(other, std::less_equal<DataT>());
     }
 
     // Comparison operator (>) based on m_sort_field
     bool operator>(const Entity& other) const {
-        return get_attribute(m_sort_field) > other.get_attribute(m_sort_field);
+        return compare_attributes(other, std::greater<DataT>());
     }
 
     // Comparison operator (>=) based on m_sort_field
     bool operator>=(const Entity& other) const {
-        return get_attribute(m_sort_field) >= other.get_attribute(m_sort_field);
+        return compare_attributes(other, std::greater_equal<DataT>());
     }
 
     // Equality operator (==) based on m_sort_field
     bool operator==(const Entity& other) const {
-        return get_attribute(m_sort_field) == other.get_attribute(m_sort_field);
+        return compare_attributes(other, std::equal_to<DataT>());
     }
 
     // Inequality operator (!=) based on m_sort_field
     bool operator!=(const Entity& other) const {
-        return get_attribute(m_sort_field) != other.get_attribute(m_sort_field);
+        return compare_attributes(other, std::not_equal_to<DataT>());
     }
 
     // Overload << operator to print all attributes
@@ -83,7 +88,7 @@ public:
         return os;
     }
 
-    // Overload the extraction operator (>>) for your custom class
+    // Overload the extraction operator
     friend std::istream& operator>>(std::istream& is, const Entity& entity) {
         for (const auto& pair : entity.m_attributes) {
             is << pair.second << '\t';
@@ -97,13 +102,13 @@ public:
         std::string line;
         if (std::getline(is, line)) {
             std::istringstream iss(line);
-            KeyT key;
+            KeyT key = 1;
             DataT value;
 
             while (std::getline(iss, value, '\t')) {
                 // Increment key for each value
-                ++key;
                 entity.set_attribute(key, value);
+                key++;
             }
         }
 

@@ -3,7 +3,7 @@ project(Assignment4)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(merge
+add_executable(sort
         main.cpp
         inc/colours.h
         inc/timer.h

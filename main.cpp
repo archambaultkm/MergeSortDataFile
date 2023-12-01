@@ -28,13 +28,13 @@ int main(int argc, char* argv[]) {
     }
 
     string file_to_sort = argv[1];
-    //sort::merge_sort<string>(file_to_sort);
 
     Timer<> timer;
     cout << "Starting sort..." << "\n";
     timer.start();
 
     sort::merge_sort<Entity<int, string>>(file_to_sort);
+    //sort::merge_sort<string>(file_to_sort);
 
     timer.stop();
 
