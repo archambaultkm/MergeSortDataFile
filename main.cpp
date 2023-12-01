@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
     timer.stop();
 
-    cout << "Sort took " << timer.get_elapsed_time() << "ms. " << endl;
+    cout << "Sort took " << timer.get_elapsed_time_s() << " seconds. " << endl;
 
     return 0;
 }

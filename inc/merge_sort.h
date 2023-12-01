@@ -8,55 +8,31 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <iostream>
 
 namespace sort {
     // Create a temporary file and return its filename
     std::string create_temp_file();
 
-    // Sort a temporary file
-    template <typename DataT>
-    void sort_temp_file(const std::string& temp_filename) {
-        std::ifstream temp_file(temp_filename);
-        std::vector<DataT> values;
-        DataT current_data;
-
-        while (getline(temp_file, current_data)) {
-            values.push_back(current_data);
-        }
-
-        temp_file.close();
-
-        std::sort(values.begin(), values.end());
-
-        std::ofstream sorted_temp_file(temp_filename);
-        for (const auto& value : values) {
-            sorted_temp_file << value << '\n';
-        }
-
-        sorted_temp_file.close();
-    }
-
-    // Split input into small chunks, sort each chunk, and write to temporary files
+    // Split input in half and write to temporary files
     template <typename DataT>
     bool split_file(const std::string& in_file, const std::string& temp_filename1, const std::string& temp_filename2) {
+        std::cout << "Splitting file" << std::endl;
+
         std::ofstream temp_file1(temp_filename1);
         std::ofstream temp_file2(temp_filename2);
 
-        // TODO this is bad
         DataT current_data;
         std::ifstream in(in_file);
         int data_count = 0;
 
-        while (!in.eof()) {
+        while (getline(in, current_data)) {
+            temp_file1 << current_data << '\n';
+            data_count++;
+
             if (getline(in, current_data)) {
-                temp_file1 << current_data << '\n';
+                temp_file2 << current_data << '\n';
                 data_count++;
-
-                if (getline(in, current_data)) {
-                    temp_file2 << current_data << '\n';
-                    data_count++;
-
-                }
             }
         }
 
@@ -66,8 +42,11 @@ namespace sort {
         return data_count > 2;
     }
 
+    // Merge two temp files back into the file they were split from
     template <typename DataT>
     void merge_files(const std::string& out_file, const std::string& temp_filename1, const std::string& temp_filename2) {
+        std::cout << "Merging temp files" << std::endl;
+
         // Open input files for reading
         std::ifstream file1(temp_filename1);
         std::ifstream file2(temp_filename2);
@@ -79,10 +58,35 @@ namespace sort {
         DataT value1, value2;
 
         // Read the first value from each file
-        if (!getline(file1, value1) || !getline(file2, value2)) {
-            // One of the files is empty, nothing to merge
+        if (!getline(file1, value1)) {
+            //out << value2 << '\n';
+            while (getline(file2, value2)) {
+                out << value2 << '\n';
+            }
+
+            // Close the files
+            file1.close();
+            file2.close();
+            out.close();
+
+            return;
+
+        } else if (!getline(file2, value2)) {
+            out << value1 << '\n';
+            while (getline(file1, value1)) {
+                out << value1 << '\n';
+            }
+
+            // Close the files
+            file1.close();
+            file2.close();
+            out.close();
+
             return;
         }
+
+//        getline(file1, value1);
+//        getline(file2, value2);
 
         while (true) {
             // Compare values from both files and write the smaller one to the output file first
@@ -134,7 +138,7 @@ namespace sort {
             merge_sort<DataT>(temp_filename2);
         }
 
-        // Merge sorted batches using temporary files
+        // Merge batches using temporary files
         merge_files<DataT>(file, temp_filename1, temp_filename2);
 
         // Clean up temporary files

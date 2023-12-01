@@ -12,7 +12,7 @@ template <typename KeyT, typename DataT>
 class Entity {
 private:
     std::map<KeyT, DataT> m_attributes;
-    int m_sort_field = 14;
+    int m_sort_field = 1;
 
 public:
     Entity() = default;
