@@ -7,18 +7,14 @@
 
 #include <string>
 #include <fstream>
-#include <vector>
 #include <iostream>
 
-namespace sort {
-    // Create a temporary file and return its filename
-    std::string create_temp_file();
+#include "../inc/utils.h"
 
+namespace sort {
     // Split input in half and write to temporary files
     template <typename DataT>
     bool split_file(const std::string& in_file, const std::string& temp_filename1, const std::string& temp_filename2) {
-        std::cout << "Splitting file" << std::endl;
-
         std::ofstream temp_file1(temp_filename1);
         std::ofstream temp_file2(temp_filename2);
 
@@ -45,8 +41,6 @@ namespace sort {
     // Merge two temp files back into the file they were split from
     template <typename DataT>
     void merge_files(const std::string& out_file, const std::string& temp_filename1, const std::string& temp_filename2) {
-        std::cout << "Merging temp files" << std::endl;
-
         // Open input files for reading
         std::ifstream file1(temp_filename1);
         std::ifstream file2(temp_filename2);
@@ -59,61 +53,45 @@ namespace sort {
 
         // Read the first value from each file
         if (!getline(file1, value1)) {
-            //out << value2 << '\n';
+            // possible only file 2 has data
             while (getline(file2, value2)) {
                 out << value2 << '\n';
             }
 
-            // Close the files
-            file1.close();
-            file2.close();
-            out.close();
-
-            return;
-
         } else if (!getline(file2, value2)) {
+            // possible only file 1 has data
             out << value1 << '\n';
             while (getline(file1, value1)) {
                 out << value1 << '\n';
             }
 
-            // Close the files
-            file1.close();
-            file2.close();
-            out.close();
-
-            return;
-        }
-
-//        getline(file1, value1);
-//        getline(file2, value2);
-
-        while (true) {
-            // Compare values from both files and write the smaller one to the output file first
-            if (value1 <= value2) {
-                out << value1 << '\n';
-
-                // Try to read the next value from file1
-                if (!getline(file1, value1)) {
-                    // file1 is exhausted, write the remaining values from file2
-                    out << value2 << '\n';
-                    while (getline(file2, value2)) {
-                        out << value2 << '\n';
-                    }
-                    break;
-                }
-
-            } else {
-                out << value2 << '\n';
-
-                // Try to read the next value from file2
-                if (!getline(file2, value2)) {
-                    // file2 is exhausted, write the remaining values from file1
+        } else {
+            while (true) {
+                // Compare values from both files and write the smaller one to the output file first
+                if (value1 <= value2) {
                     out << value1 << '\n';
-                    while (getline(file1, value1)) {
-                        out << value1 << '\n';
+
+                    // Try to read the next value from file1
+                    if (!getline(file1, value1)) {
+                        // file1 is exhausted, write the remaining values from file2
+                        out << value2 << '\n';
+                        while (getline(file2, value2)) {
+                            out << value2 << '\n';
+                        }
+                        break;
                     }
-                    break;
+                } else {
+                    out << value2 << '\n';
+
+                    // Try to read the next value from file2
+                    if (!getline(file2, value2)) {
+                        // file2 is exhausted, write the remaining values from file1
+                        out << value1 << '\n';
+                        while (getline(file1, value1)) {
+                            out << value1 << '\n';
+                        }
+                        break;
+                    }
                 }
             }
         }
@@ -126,20 +104,29 @@ namespace sort {
 
     // Perform merge sort on a file using temporary files
     template <typename DataT>
-    void merge_sort(std::string file) {
+    void merge_sort_file(std::string file) {
         // Create temporary files for sorting
         std::string temp_filename1 = create_temp_file();
         std::string temp_filename2 = create_temp_file();
 
-        // Split input into two batches and write to temporary files
-        if (split_file<DataT>(file, temp_filename1, temp_filename2)) {
-            // Recursively merge sort the two halves of the file
-            merge_sort<DataT>(temp_filename1);
-            merge_sort<DataT>(temp_filename2);
-        }
+        try {
+            // Split input into two batches and write to temporary files
+            if (split_file<DataT>(file, temp_filename1, temp_filename2)) {
+                // if the file needs to be split further, recursively merge sort the two halves of the file
+                merge_sort_file<DataT>(temp_filename1);
+                merge_sort_file<DataT>(temp_filename2);
+            }
 
-        // Merge batches using temporary files
-        merge_files<DataT>(file, temp_filename1, temp_filename2);
+            // Merge batches using temporary files
+            merge_files<DataT>(file, temp_filename1, temp_filename2);
+
+        } catch (std::exception e) {
+            // Make sure files are removed if program throws an exception
+            std::remove(temp_filename1.c_str());
+            std::remove(temp_filename2.c_str());
+
+            std::cout << e.what() << std::endl;
+        }
 
         // Clean up temporary files
         std::remove(temp_filename1.c_str());

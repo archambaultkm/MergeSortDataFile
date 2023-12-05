@@ -42,8 +42,6 @@ public:
      */
     void stop() {
         m_duration = Clock::now();
-        //m_time_elapsed_ms = std::chrono::duration_cast<std::chrono::microseconds>(duration - m_start_time).count();
-        //m_time_elapsed_s = std::chrono::duration_cast<std::chrono::seconds>(duration - m_start_time).count();
     }
 
     /**

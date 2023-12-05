@@ -12,6 +12,7 @@ using std::endl;
 
 // expected program arguments, used as feedback to the user
 const string EXPECTED_FORMAT = "\"./merge <filename>.txt -<field#>\"";
+const int REQUIRED_NUM_ARGS = 3;
 
 /**
  * Validate program arguments
@@ -22,22 +23,26 @@ const string EXPECTED_FORMAT = "\"./merge <filename>.txt -<field#>\"";
 bool valid_arguments(int argc, int expected_num_args, char* argv[], const string& expected_format);
 
 int main(int argc, char* argv[]) {
-    if (!valid_arguments(argc, 3, argv, EXPECTED_FORMAT)) {
+    // Validate arguments (valid_arguments() provides feedback to the user if it fails)
+    if (!valid_arguments(argc, REQUIRED_NUM_ARGS, argv, EXPECTED_FORMAT)) {
 
         return 1;
     }
 
+    // Set the sort field in the Entity class
+    int sort_field = std::stoi(argv[2]);
+    Entity<string>::set_sort_field(sort_field);
+
+    // Print an indication that sorting has begun
+    cout << "Starting sort..." << "\n";
     string file_to_sort = argv[1];
 
+    // Perform and time merge sort on the specified file
     Timer<> timer;
-    cout << "Starting sort..." << "\n";
-    timer.start();
-
-    sort::merge_sort<Entity<int, string>>(file_to_sort);
-    //sort::merge_sort<string>(file_to_sort);
-
+    sort::merge_sort_file<Entity<string>>(file_to_sort);
     timer.stop();
 
+    // Print the elapsed time for the sorting process
     cout << "Sort took " << timer.get_elapsed_time_s() << " seconds. " << endl;
 
     return 0;
@@ -60,14 +65,8 @@ bool valid_arguments(int argc, int expected_num_args, char* argv[], const string
         return false;
     }
 
-    if (!is_int(argv[2])) {
-        cout << "Invalid input: '" << argv[2] << "' is not a valid integer." << endl;
-
-        return false;
-    }
-
-    if (!is_positive(argv[2])) {
-        cout << "Invalid input: '" << argv[2] << "' must be a positive integer to represent the field to sort on." << endl;
+    if (!is_positive_int(argv[2])) {
+        cout << "Invalid input: '" << argv[2] << "' must contain a positive integer to represent the field to sort on." << endl;
 
         return false;
     }

@@ -11,6 +11,103 @@
 #include <iostream>
 #include <sstream>
 
+// Function to create a temporary file and return its filename
+std::string create_temp_file() {
+    char filename[] = "tempfileXXXXXX";
+    int fd = mkstemp(filename);
+    //close(fd); // Close the file descriptor to keep the file open
+    return filename;
+}
+
+bool is_int(char* char_p) {
+    try {
+        size_t pos;
+        std::stoi(char_p, &pos);
+        if (pos != std::strlen(char_p)) {
+
+            return false;
+        }
+
+    } catch (const std::invalid_argument& e) {
+
+        return false;  // The string couldn't be converted to a float, return the string
+    } catch (const std::out_of_range& e) {
+
+        return false;  // The converted value is out of the range representable by float, return the string
+    }
+
+    return true;
+}
+
+bool is_int(const std::string& string) {
+    try {
+        size_t pos;
+        std::stoi(string, &pos);
+        if (pos != string.length()) {
+
+            return false;
+        }
+
+    } catch (const std::invalid_argument& e) {
+
+        return false;  // The string couldn't be converted to an int, return the string
+    } catch (const std::out_of_range& e) {
+
+        return false;  // The converted value is out of the range representable by int, return the string
+    }
+
+    return true;
+}
+
+bool is_float(const std::string& string) {
+    try {
+        size_t pos;
+        std::stof(string, &pos);
+        if (pos != string.length()) {
+
+            return false;
+        }
+
+    } catch (const std::invalid_argument& e) {
+
+        return false;  // The string couldn't be converted to an int, return the string
+    } catch (const std::out_of_range& e) {
+
+        return false;  // The converted value is out of the range representable by int, return the string
+    }
+
+    return true;
+}
+
+bool is_positive_int(char* char_p) {
+    if (!is_int(char_p)) return false;
+
+    return std::stoi(char_p) > 0;
+}
+
+std::variant<float, std::string> convert_to_variant(const std::string& value) {
+    try {
+        size_t pos; // position of first char that couldn't be converted to an integer
+        float floatValue = std::stof(value, &pos);
+
+        // see if the whole value could be converted to a float
+        if (pos == value.length()) {
+
+            return floatValue;
+        } else {
+
+            return value;
+        }
+
+    } catch (const std::invalid_argument& e) {
+
+        return value;  // The string couldn't be converted to a float, return the string
+    } catch (const std::out_of_range& e) {
+
+        return value;  // The converted value is out of the range representable by float, return the string
+    }
+}
+
 std::string remove_non_alpha(const std::string& str) {
     std::string corrected;
 

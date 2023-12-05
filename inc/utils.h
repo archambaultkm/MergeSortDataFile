@@ -10,43 +10,18 @@
 
 #include <string>
 
-inline bool is_int(char* char_p) {
-    size_t pos;
-    int int_val = std::stoi(char_p, &pos);
-    if (pos != std::strlen(char_p)) {
+// Create a temporary file and return its filename
+std::string create_temp_file();
 
-        return false;
-    }
+inline bool is_int(char* char_p);
 
-    return true;
-}
+inline bool is_int(const std::string& string);
 
-inline bool is_positive(const char* char_p) {
-    return std::stoi(char_p) > 0;
-}
+inline bool is_float(const std::string& string);
 
-inline std::variant<float, std::string> convert_to_variant(const std::string& value) {
-    try {
-        size_t pos; // position of first char that couldn't be converted to an integer
-        float floatValue = std::stof(value, &pos);
+inline bool is_positive_int(char* char_p);
 
-        // see if the whole value could be converted to a float
-        if (pos == value.length()) {
-
-            return floatValue;
-        } else {
-
-            return value;
-        }
-
-    } catch (const std::invalid_argument& e) {
-
-        return value;  // The string couldn't be converted to a float, return the string
-    } catch (const std::out_of_range& e) {
-
-        return value;  // The converted value is out of the range representable by float, return the string
-    }
-}
+inline std::variant<float, std::string> convert_to_variant(const std::string& value);
 
 /**
  * Remove numbers or special characters from a provided string
