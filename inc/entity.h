@@ -21,10 +21,6 @@ private:
 public:
     Entity() = default;
 
-    void clear() {
-        m_attributes.clear();
-    }
-
     // Setter for the sort field
     static void set_sort_field(int field) {
         m_sort_field = field;
@@ -34,24 +30,21 @@ public:
         m_attributes[key] = value;
     }
 
-    // TODO make this apply to template instances where DataT is string, make generic one just return second
     std::variant<DataT, int, float> get_attribute(int key) const {
         auto iter = m_attributes.find(key);
 
         if (iter != m_attributes.end()) {
-            if (is_int(iter->second)) {
-                return stoi(iter->second);
-
-            } else if (is_float(iter->second)) {
-                return stof(iter->second);
+            // DataT being string is a special case because it could also represent numeric types
+            if constexpr (std::is_same_v<DataT, std::string>) {
+                if (is_int(iter->second)) return stoi(iter->second);
+                if (is_float(iter->second)) return stof(iter->second);
             }
 
             return iter->second;
-
-        } else { // TODO this is strange
-            // key was not found
-            throw std::out_of_range("Key not found");
         }
+
+        // key was not found
+        throw std::out_of_range("Key not found");
     }
 
     template <typename Operator>

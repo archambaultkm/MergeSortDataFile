@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 
     // Perform and time merge sort on the specified file
     Timer<> timer;
-    sort::merge_sort_file<Entity<string>>(file_to_sort);
+    sort::merge_sort_file(file_to_sort);
     timer.stop();
 
     // Print the elapsed time for the sorting process

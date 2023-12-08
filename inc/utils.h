@@ -13,15 +13,15 @@
 // Create a temporary file and return its filename
 std::string create_temp_file();
 
-inline bool is_int(char* char_p);
+bool is_int(char* char_p);
 
-inline bool is_int(const std::string& string);
+bool is_int(const std::string& string);
 
-inline bool is_float(const std::string& string);
+bool is_float(const std::string& string);
 
-inline bool is_positive_int(char* char_p);
+bool is_positive_int(char* char_p);
 
-inline std::variant<float, std::string> convert_to_variant(const std::string& value);
+std::variant<float, std::string> convert_to_variant(const std::string& value);
 
 /**
  * Remove numbers or special characters from a provided string
