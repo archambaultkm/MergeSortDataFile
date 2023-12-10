@@ -22,6 +22,13 @@ private:
     typename Clock::time_point m_start_time; // starting time point
     typename Clock::time_point m_duration;
 
+    struct ElapsedTime {
+        long value;
+        const char* unit;
+
+        ElapsedTime(long val, const char* u) : value(val), unit(u) {}
+    };
+
 public:
     /**
      * @brief Default constructor.
@@ -66,6 +73,15 @@ public:
      */
     long get_elapsed_time_s() {
         return std::chrono::duration_cast<std::chrono::seconds>(m_duration - m_start_time).count();
+    }
+
+
+    ElapsedTime get_elapsed_time() {
+        if (get_elapsed_time_s() > 0) {
+            return ElapsedTime(get_elapsed_time_s(), "second(s)");
+        } else {
+            return ElapsedTime(get_elapsed_time_ms(), "microsecond(s)");
+        }
     }
 };
 #endif //ASSIGNMENT_3_TIMER_H

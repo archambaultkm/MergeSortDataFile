@@ -14,8 +14,7 @@
 // Function to create a temporary file and return its filename
 std::string create_temp_file() {
     char filename[] = "tempfileXXXXXX";
-    int fd = mkstemp(filename);
-    //close(fd); // Close the file descriptor to keep the file open
+    mkstemp(filename);
     return filename;
 }
 

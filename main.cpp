@@ -2,7 +2,6 @@
 
 #include "inc/colours.h"
 #include "inc/utils.h"
-#include "inc/entity.h"
 #include "inc/sort.h"
 #include "inc/timer.h"
 
@@ -29,7 +28,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // initialize file and set Entity sorting field from validated arguments
+    // initialize file and Entity sorting field from validated arguments
     string file_to_sort = argv[1];
     int sort_field = parse_int_from_char(argv[2]);
 
@@ -41,7 +40,7 @@ int main(int argc, char* argv[]) {
     timer.measure_function_time([&]() { ext_sort::merge_sort_file(file_to_sort, sort_field); });
 
     // Print the elapsed time for the sorting process
-    cout << "Sort took " << timer.get_elapsed_time_s() << " second(s). " << endl;
+    cout << "Sort took " << timer.get_elapsed_time().value << " " << timer.get_elapsed_time().unit << endl;
 
     return 0;
 }

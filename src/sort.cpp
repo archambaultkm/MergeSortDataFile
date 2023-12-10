@@ -21,6 +21,7 @@ namespace ext_sort {
         std::ifstream in(in_file);
         int data_count = 0;
 
+        //as long as the in file has data, split it equally between the two temp files
         while (getline(in, current_data)) {
             temp_file1 << current_data << '\n';
             data_count++;
@@ -34,6 +35,7 @@ namespace ext_sort {
         temp_file1.close();
         temp_file2.close();
 
+        // return if the file should continue to be split for merge sort purposes
         return data_count > 2;
     }
 
