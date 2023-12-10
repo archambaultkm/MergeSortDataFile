@@ -17,10 +17,12 @@ void Entity::set_sort_field(int field) {
     m_sort_field = field;
 }
 
+// set the attribute for a given key
 void Entity::set_attribute(int key, const std::string& value) {
     m_attributes[key] = value;
 }
 
+// get the attribute at a given key, parsed to an accurate data type
 std::variant<std::string, int, float> Entity::get_attribute(int key) const {
     auto iter = m_attributes.find(key);
 

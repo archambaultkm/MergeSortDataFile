@@ -13,13 +13,9 @@
 // Create a temporary file and return its filename
 std::string create_temp_file();
 
-bool is_int(char* char_p);
-
 bool is_int(const std::string& string);
 
 bool is_float(const std::string& string);
-
-bool is_positive_int(char* char_p);
 
 int parse_int_from_char(const char* input);
 

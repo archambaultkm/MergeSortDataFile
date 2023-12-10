@@ -6,6 +6,10 @@
 
 #include <string>
 #include <fstream>
+#include <iostream>
+
+#include "../inc/utils.h"
+#include "../inc/entity.h"
 
 namespace ext_sort {
     // Split input in half and write to temporary files
@@ -74,6 +78,7 @@ namespace ext_sort {
                         }
                         break;
                     }
+
                 } else {
                     out << value2 << '\n';
 
@@ -124,5 +129,11 @@ namespace ext_sort {
         // Clean up temporary files
         std::remove(temp_filename1.c_str());
         std::remove(temp_filename2.c_str());
+    }
+
+    // set entity sort field and call merge_sort_file on the given file name
+    void merge_sort_file(const std::string& file, int field_to_sort) {
+        Entity::set_sort_field(field_to_sort);
+        merge_sort_file(file);
     }
 }

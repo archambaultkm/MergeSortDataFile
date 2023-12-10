@@ -6,11 +6,6 @@
 #define ASSIGNMENT4_SORT_H
 
 #include <string>
-#include <fstream>
-#include <iostream>
-
-#include "../inc/utils.h"
-#include "../inc/entity.h"
 
 namespace ext_sort {
     // Split input in half and write to temporary files
@@ -21,6 +16,9 @@ namespace ext_sort {
 
     // Perform merge sort on a file using temporary files
     void merge_sort_file(const std::string& file);
+
+    // Perform merge sort on a file using temporary files and set sort field
+    void merge_sort_file(const std::string& file, int field_to_sort);
 }
 
 #endif //ASSIGNMENT4_SORT_H
