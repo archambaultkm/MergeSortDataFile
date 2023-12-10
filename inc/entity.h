@@ -22,10 +22,13 @@ public:
     // Setter for the sort field
     static void set_sort_field(int field);
 
+    // set the attribute for a given key
     void set_attribute(int key, const std::string& value);
 
+    // get the attribute at a given key, parsed to an accurate data type
     std::variant<std::string, int, float> get_attribute(int key) const;
 
+    // compare two entities by their attribute at m_sort_field
     template <typename Operator>
     bool compare_attributes(const Entity& other, Operator op) const {
         try {

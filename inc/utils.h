@@ -13,12 +13,16 @@
 // Create a temporary file and return its filename
 std::string create_temp_file();
 
+// Check if string can be converted to int
 bool is_int(const std::string& string);
 
+// Check if string can be converted to float
 bool is_float(const std::string& string);
 
+// Extract an int from a char*
 int parse_int_from_char(const char* input);
 
+// check if input matches a specified regex pattern
 bool regex_match(const char* input, const std::string& regex_pattern);
 
 /**
