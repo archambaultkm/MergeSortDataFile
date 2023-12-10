@@ -21,7 +21,9 @@ bool is_float(const std::string& string);
 
 bool is_positive_int(char* char_p);
 
-std::variant<float, std::string> convert_to_variant(const std::string& value);
+int parse_int_from_char(const char* input);
+
+bool regex_match(const char* input, const std::string& regex_pattern);
 
 /**
  * Remove numbers or special characters from a provided string

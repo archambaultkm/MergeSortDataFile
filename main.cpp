@@ -11,7 +11,7 @@ using std::cout;
 using std::endl;
 
 // expected program arguments, used as feedback to the user
-const string EXPECTED_FORMAT = "\"./merge <filename>.txt -<field#>\"";
+const string EXPECTED_FORMAT = "\"./sort <filename>.txt -field=<field#>\"";
 const int REQUIRED_NUM_ARGS = 3;
 
 /**
@@ -29,21 +29,21 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    string file_to_sort = argv[1];
+
     // Set the sort field in the Entity class
-    int sort_field = std::stoi(argv[2]);
-    Entity<string>::set_sort_field(sort_field);
+    int sort_field = parse_int_from_char(argv[2]);
+    Entity::set_sort_field(sort_field);
 
     // Print an indication that sorting has begun
     cout << "Starting sort..." << "\n";
-    string file_to_sort = argv[1];
 
     // Perform and time merge sort on the specified file
     Timer<> timer;
-    sort::merge_sort_file(file_to_sort);
-    timer.stop();
+    timer.measure_function_time([&]() { sort::merge_sort_file(file_to_sort); });
 
     // Print the elapsed time for the sorting process
-    cout << "Sort took " << timer.get_elapsed_time_s() << " seconds. " << endl;
+    cout << "Sort took " << timer.get_elapsed_time_s() << " second(s). " << endl;
 
     return 0;
 }
@@ -57,7 +57,7 @@ bool valid_arguments(int argc, int expected_num_args, char* argv[], const string
     }
 
     // sample file is expected to be a txt file
-    string extension = "txt";
+    std::string extension = "txt";
     if (!is_valid_file_path(argv[1], extension)) {
         cout << RED << "Must enter a valid " << "." << extension << " format file name for all provided files." << RESET << endl;
         cout << CYAN << "Correct usage: " << expected_format << RESET << endl;
@@ -65,8 +65,17 @@ bool valid_arguments(int argc, int expected_num_args, char* argv[], const string
         return false;
     }
 
-    if (!is_positive_int(argv[2])) {
-        cout << "Invalid input: '" << argv[2] << "' must contain a positive integer to represent the field to sort on." << endl;
+    // second argument is expected in the format "-field=<#>"
+    std::string arg2_format = R"(-field=\d{1,2})";
+    if (!regex_match(argv[2], arg2_format)) {
+        cout << RED << "Invalid argument: " << argv[2] << endl;
+        cout << CYAN << "Correct usage: " << expected_format << RESET << endl;
+
+        return false;
+    }
+
+    if (parse_int_from_char(argv[2]) <= 0) {
+        cout << RED << "Invalid input: '" << argv[2] << "' must contain a positive integer to represent the field to sort on." << RESET << endl;
 
         return false;
     }

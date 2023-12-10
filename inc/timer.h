@@ -21,14 +21,24 @@ class Timer {
 private:
     typename Clock::time_point m_start_time; // starting time point
     typename Clock::time_point m_duration;
-    long m_time_elapsed_ms; // elapsed time in microseconds
-    long m_time_elapsed_s;
 
 public:
     /**
      * @brief Default constructor.
      */
-    Timer() : m_start_time(Clock::now()), m_duration(Clock::now()), m_time_elapsed_ms(0), m_time_elapsed_s(0) {}
+    Timer() : m_start_time(Clock::now()), m_duration(Clock::now()) {}
+
+    /**
+     * Measure the time it takes to execute a given function.
+     * @param func The function to be measured.
+     * @return The elapsed time in microseconds.
+     */
+    template <typename Func>
+    void measure_function_time(const Func& func) {
+        start();
+        func();
+        stop();
+    }
 
     /**
      * Start the timer by recording the current time.

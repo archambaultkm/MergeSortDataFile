@@ -19,6 +19,31 @@ std::string create_temp_file() {
     return filename;
 }
 
+int parse_int_from_char(const char* input) {
+    int result = 0;
+    const char* ptr = input;
+
+    // Skip non-numeric characters and the '=' sign
+    while (*ptr && !isdigit(*ptr)) {
+        ++ptr;
+    }
+
+    // Parse the numeric part
+    while (*ptr && isdigit(*ptr)) {
+        result = result * 10 + (*ptr - '0');
+        ++ptr;
+    }
+
+    return result;
+}
+
+bool regex_match(const char* input, const std::string& regex_pattern) {
+    std::regex pattern(regex_pattern);
+    std::cmatch match;
+
+    return std::regex_search(input, match, pattern);
+}
+
 bool is_int(char* char_p) {
     try {
         size_t pos;

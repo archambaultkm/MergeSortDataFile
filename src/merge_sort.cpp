@@ -13,7 +13,7 @@ namespace sort {
         std::ofstream temp_file1(temp_filename1);
         std::ofstream temp_file2(temp_filename2);
 
-        Entity<std::string> current_data;
+        Entity current_data;
         std::ifstream in(in_file);
         int data_count = 0;
 
@@ -43,7 +43,7 @@ namespace sort {
         std::ofstream out(out_file);
 
         // Variables to store the current values from each file
-        Entity<std::string> value1, value2;
+        Entity value1, value2;
 
         // Read the first value from each file
         if (!getline(file1, value1)) {

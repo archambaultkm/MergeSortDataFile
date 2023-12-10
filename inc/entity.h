@@ -11,10 +11,9 @@
 #include <variant>
 #include <sstream>
 
-template <typename DataT>
 class Entity {
 private:
-    std::map<int, DataT> m_attributes; // this entity's attributes
+    std::map<int, std::string> m_attributes; // this entity's attributes
     static int m_sort_field; // the field to sort on, same for all entities
     static constexpr int M_INDEX_BASE = 1; // determines what number "key" index starts on
 
@@ -22,30 +21,11 @@ public:
     Entity() = default;
 
     // Setter for the sort field
-    static void set_sort_field(int field) {
-        m_sort_field = field;
-    }
+    static void set_sort_field(int field);
 
-    void set_attribute(int key, const DataT& value) {
-        m_attributes[key] = value;
-    }
+    void set_attribute(int key, const std::string& value);
 
-    std::variant<DataT, int, float> get_attribute(int key) const {
-        auto iter = m_attributes.find(key);
-
-        if (iter != m_attributes.end()) {
-            // DataT being string is a special case because it could also represent numeric types
-            if constexpr (std::is_same_v<DataT, std::string>) {
-                if (is_int(iter->second)) return stoi(iter->second);
-                if (is_float(iter->second)) return stof(iter->second);
-            }
-
-            return iter->second;
-        }
-
-        // key was not found
-        throw std::out_of_range("Key not found");
-    }
+    std::variant<std::string, int, float> get_attribute(int key) const;
 
     template <typename Operator>
     bool compare_attributes(const Entity& other, Operator op) const {
@@ -59,80 +39,32 @@ public:
     }
 
     // Comparison operator (<) based on m_sort_field
-    bool operator<(const Entity& other) const {
-        return compare_attributes(other, std::less());
-    }
+    bool operator<(const Entity& other) const;
 
     // Comparison operator (<=) based on m_sort_field
-    bool operator<=(const Entity& other) const {
-        return compare_attributes(other, std::less_equal());
-    }
+    bool operator<=(const Entity& other) const;
 
     // Comparison operator (>) based on m_sort_field
-    bool operator>(const Entity& other) const {
-        return compare_attributes(other, std::greater());
-    }
+    bool operator>(const Entity& other) const;
 
     // Comparison operator (>=) based on m_sort_field
-    bool operator>=(const Entity& other) const {
-        return compare_attributes(other, std::greater_equal());
-    }
+    bool operator>=(const Entity& other) const;
 
     // Equality operator (==) based on m_sort_field
-    bool operator==(const Entity& other) const {
-        return compare_attributes(other, std::equal_to());
-    }
+    bool operator==(const Entity& other) const;
 
     // Inequality operator (!=) based on m_sort_field
-    bool operator!=(const Entity& other) const {
-        return compare_attributes(other, std::not_equal_to());
-    }
+    bool operator!=(const Entity& other) const;
 
     // Overload << operator to print all attributes
-    friend std::ostream& operator<<(std::ostream& os, const Entity& entity) {
-        for (const auto& pair : entity.m_attributes) {
-            os << pair.second << '\t';
-        }
-
-        return os;
-    }
+    friend std::ostream& operator<<(std::ostream& os, const Entity& entity);
 
     // Overload the extraction operator
-    friend std::istream& operator>>(std::istream& is, const Entity& entity) {
-        int key = entity.m_attributes.size();
-        DataT value;
-
-        while (getline(is, entity, '\t')) {
-            // Increment key for each value
-            entity.set_attribute(key, value);
-            key++;
-        }
-
-        return is;
-    }
+    friend std::istream& operator>>(std::istream& is, const Entity& entity);
 
     // Overload std::getline to extract data from a stream into an Entity
-    friend std::istream& getline(std::istream& is, Entity& entity) {
-        std::string line;
-        if (std::getline(is, line)) {
-            std::istringstream iss(line);
-            int key = M_INDEX_BASE;
-            DataT value;
-
-            while (std::getline(iss, value, '\t')) {
-                // Increment key for each value
-                entity.set_attribute(key, value);
-                key++;
-            }
-        }
-
-        return is;
-    }
+    friend std::istream& getline(std::istream& is, Entity& entity);
 };
-
-// Initialize the static sort field
-template <typename DataT>
-int Entity<DataT>::m_sort_field = 0;
 
 
 #endif //ASSIGNMENT4_ENTITY_H

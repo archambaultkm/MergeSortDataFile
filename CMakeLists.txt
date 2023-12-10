@@ -10,7 +10,6 @@ add_executable(sort
         inc/utils.h
         src/utils.cpp
         inc/entity.h
-        src/entity_file_processor.cpp
-        inc/entity_file_processor.h
+        src/entity.cpp
         inc/merge_sort.h
         src/merge_sort.cpp)
