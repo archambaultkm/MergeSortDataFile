@@ -11,7 +11,6 @@
 #include <iostream>
 #include <sstream>
 
-// Function to create a temporary file and return its filename
 std::string create_temp_file() {
     char filename[] = "tempfileXXXXXX";
     mkstemp(filename);

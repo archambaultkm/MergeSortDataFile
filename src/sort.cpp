@@ -12,7 +12,6 @@
 #include "../inc/entity.h"
 
 namespace ext_sort {
-    // Split input in half and write to temporary files
     bool split_file(const std::string &in_file, const std::string &temp_filename1, const std::string &temp_filename2) {
         std::ofstream temp_file1(temp_filename1);
         std::ofstream temp_file2(temp_filename2);
@@ -39,7 +38,6 @@ namespace ext_sort {
         return data_count > 2;
     }
 
-    // Merge two temp files back into the file they were split from
     void merge_files(const std::string &out_file, const std::string &temp_filename1, const std::string &temp_filename2) {
         // Open input files for reading
         std::ifstream file1(temp_filename1);
@@ -103,7 +101,6 @@ namespace ext_sort {
         out.close();
     }
 
-    // Perform merge sort on a file using temporary files
     void merge_sort_file(const std::string& file) {
         // Create temporary files for sorting
         std::string temp_filename1 = create_temp_file();
@@ -133,7 +130,6 @@ namespace ext_sort {
         std::remove(temp_filename2.c_str());
     }
 
-    // set entity sort field and call merge_sort_file on the given file name
     void merge_sort_file(const std::string& file, int field_to_sort) {
         Entity::set_sort_field(field_to_sort);
         merge_sort_file(file);
