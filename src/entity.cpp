@@ -12,6 +12,10 @@
 // Initialize the static sort field
 int Entity::m_sort_field = 0;
 
+bool Entity::empty() {
+    return m_attributes.empty();
+}
+
 void Entity::set_sort_field(int field) {
     m_sort_field = field;
 }
@@ -78,6 +82,10 @@ std::istream& getline(std::istream& is, Entity& entity) {
             entity.set_attribute(key, value);
             key++;
         }
+    }
+
+    if (entity.empty() || is.eof()) {
+        is.setstate(std::ios::failbit);  // Set the fail bit if we tried to read at the end of the stream
     }
 
     return is;

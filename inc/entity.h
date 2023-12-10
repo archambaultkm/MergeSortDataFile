@@ -19,6 +19,9 @@ private:
 public:
     Entity() = default;
 
+    // check if m_attributes are empty
+    bool empty();
+
     // Setter for the sort field
     static void set_sort_field(int field);
 

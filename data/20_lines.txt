@@ -1,20 +1,20 @@
-W4436502	Mullaly	Adolf	4 Ruskin Plaza	New Glasgow	Nova Scotia	J5H 8J2	314-526-6383	Male	63	40	factory	true	71.13	
-W4445568	McCully	Adria	7021 Golf Course Lane	Marystown	Newfoundland and Labrador	N5T 1S3	934-575-9310	Female	84	13	office	false	17.8	
-W1075892	Hatchell	Alia	536 Anthes Trail	Harbour Breton	Newfoundland and Labrador	Y6E 0J4	599-284-3936	Female	26	26	office	true	36.8	
-W0457349	Manueli	Ambrose	94803 Mccormick Alley	Lac-Mégantic	Québec	G4J 5Y2	772-537-4832	Non-binary	29	40	sales	true	4.33	
-W4960602	Pierro	Babbie	79315 Cardinal Lane	New Glasgow	Nova Scotia	E1R 8T3	793-113-8549	Female	94	86	office	true	4.17	
-W6984143	Dannatt	Bethany	587 Butternut Lane	Weyburn	Saskatchewan	B2L 0P9	319-343-7124	Female	11	25	office	true	58.48	
-W6884522	Josefer	Caty	551 Bellgrove Alley	Nipawin	Saskatchewan	O7P 4R3	655-751-9283	Female	27	94	factory	true	90.09	
-W6443784	Beadman	Cher	7193 Tennyson Terrace	Antigonish	Nova Scotia	A5X 0J8	464-293-5247	Female	60	29	sales	true	82.18	
-W9760554	Kosel	Courtney	1 Merchant Parkway	Grand Bank	Newfoundland and Labrador	P0Q 0X6	216-219-1744	Female	31	70	sales	false	32.37	
-W9571635	Mannock	Daffi	947 Grover Street	Lewisporte	Newfoundland and Labrador	L8W 1U0	136-674-7429	Bigender	23	85	office	true	61.88	
-W9564682	Bosward	Eugen	05802 Dakota Way	Fort Smith	Northwest Territories	F8J 2D5	136-868-9182	Male	9	34	sales	false	65.43	
-W9836949	Dunphie	Linnet	714 Eliot Pass	Minnedosa	Manitoba	Q5E 6S4	453-217-7341	Female	31	47	office	true	96.21	
-W4443872	Gantzman	Mareah	1 Maple Wood Hill	Drummondville	Québec	J3Z 1N5	788-404-0688	Female	68	36	factory	false	17.02	
-W4770440	Rudsdale	Melissa	81 Michigan Point	Pasadena	Newfoundland and Labrador	Y2M 9Z5	584-260-1853	Female	40	45	office	false	28.13	
 W2623143	Pineaux	Nannie	810 Arizona Point	Norman Wells	Northwest Territories	X8F 8L9	207-617-0055	Female	4	95	office	true	49.69	
-W6420452	Skeene	Nehemiah	16134 Sommers Center	Mont-Saint-Hilaire	Québec	M1Q 8N0	580-664-9083	Male	35	53	factory	true	67.43	
-W1596569	Freer	Rad	09979 South Road	Saint John	New Brunswick	U5Y 3B1	702-240-8780	Male	78	69	factory	true	74.59	
-W8408057	Davidescu	Reagen	36 Blackbird Terrace	Grand Bank	Newfoundland and Labrador	K3W 7D3	411-378-5192	Male	30	2	office	true	60.18	
 W9548172	Bourdas	Regine	9 Village Court	Torbay	Newfoundland and Labrador	U7M 9V7	711-549-2048	Female	7	94	sales	false	34.77	
+W9564682	Bosward	Eugen	05802 Dakota Way	Fort Smith	Northwest Territories	F8J 2D5	136-868-9182	Male	9	34	sales	false	65.43	
+W6984143	Dannatt	Bethany	587 Butternut Lane	Weyburn	Saskatchewan	B2L 0P9	319-343-7124	Female	11	25	office	true	58.48	
+W9571635	Mannock	Daffi	947 Grover Street	Lewisporte	Newfoundland and Labrador	L8W 1U0	136-674-7429	Bigender	23	85	office	true	61.88	
+W1075892	Hatchell	Alia	536 Anthes Trail	Harbour Breton	Newfoundland and Labrador	Y6E 0J4	599-284-3936	Female	26	26	office	true	36.8	
+W6884522	Josefer	Caty	551 Bellgrove Alley	Nipawin	Saskatchewan	O7P 4R3	655-751-9283	Female	27	94	factory	true	90.09	
+W0457349	Manueli	Ambrose	94803 Mccormick Alley	Lac-Mégantic	Québec	G4J 5Y2	772-537-4832	Non-binary	29	40	sales	true	4.33	
+W8408057	Davidescu	Reagen	36 Blackbird Terrace	Grand Bank	Newfoundland and Labrador	K3W 7D3	411-378-5192	Male	30	2	office	true	60.18	
+W9760554	Kosel	Courtney	1 Merchant Parkway	Grand Bank	Newfoundland and Labrador	P0Q 0X6	216-219-1744	Female	31	70	sales	false	32.37	
+W9836949	Dunphie	Linnet	714 Eliot Pass	Minnedosa	Manitoba	Q5E 6S4	453-217-7341	Female	31	47	office	true	96.21	
+W6420452	Skeene	Nehemiah	16134 Sommers Center	Mont-Saint-Hilaire	Québec	M1Q 8N0	580-664-9083	Male	35	53	factory	true	67.43	
+W4770440	Rudsdale	Melissa	81 Michigan Point	Pasadena	Newfoundland and Labrador	Y2M 9Z5	584-260-1853	Female	40	45	office	false	28.13	
+W6443784	Beadman	Cher	7193 Tennyson Terrace	Antigonish	Nova Scotia	A5X 0J8	464-293-5247	Female	60	29	sales	true	82.18	
+W4436502	Mullaly	Adolf	4 Ruskin Plaza	New Glasgow	Nova Scotia	J5H 8J2	314-526-6383	Male	63	40	factory	true	71.13	
+W4443872	Gantzman	Mareah	1 Maple Wood Hill	Drummondville	Québec	J3Z 1N5	788-404-0688	Female	68	36	factory	false	17.02	
+W1596569	Freer	Rad	09979 South Road	Saint John	New Brunswick	U5Y 3B1	702-240-8780	Male	78	69	factory	true	74.59	
+W4445568	McCully	Adria	7021 Golf Course Lane	Marystown	Newfoundland and Labrador	N5T 1S3	934-575-9310	Female	84	13	office	false	17.8	
+W4960602	Pierro	Babbie	79315 Cardinal Lane	New Glasgow	Nova Scotia	E1R 8T3	793-113-8549	Female	94	86	office	true	4.17	
 W3680879	Hurling	Teena	9 Melby Place	Greenwood	Nova Scotia	L6Y 2G7	147-113-5242	Female	97	11	office	false	9.96	

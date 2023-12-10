@@ -31,74 +31,67 @@ namespace ext_sort {
             }
         }
 
-        temp_file1.close();
-        temp_file2.close();
-
         // return if the file should continue to be split for merge sort purposes
-        return data_count > 2;
+        return data_count > 1;
     }
 
     void merge_files(const std::string &out_file, const std::string &temp_filename1, const std::string &temp_filename2) {
-        // Open input files for reading
+        // Open input/output files
         std::ifstream file1(temp_filename1);
         std::ifstream file2(temp_filename2);
-
-        // Open output file for writing
         std::ofstream out(out_file);
 
-        // Variables to store the current values from each file
+        // Entities to store the current values from each file
         Entity value1, value2;
 
         // Read the first value from each file
         if (!getline(file1, value1)) {
-            // possible only file 2 has data
+            // file1 is empty, copy the remaining values from file2
             while (getline(file2, value2)) {
                 out << value2 << '\n';
             }
+            return;
+        }
 
-        } else if (!getline(file2, value2)) {
-            // possible only file 1 has data
+        if (!getline(file2, value2)) {
+            // file2 is empty, copy the remaining values from file1
             out << value1 << '\n';
             while (getline(file1, value1)) {
                 out << value1 << '\n';
             }
+            return;
+        }
 
-        } else {
-            while (true) {
-                // Compare values from both files and write the smaller one to the output file first
-                if (value1 <= value2) {
-                    out << value1 << '\n';
+        // loop until one of the files is exhausted
+        while (true) {
+            // Compare values from both files and write the smaller one to the output file first
+            if (value1 <= value2) {
+                out << value1 << '\n';
 
-                    // Try to read the next value from file1
-                    if (!getline(file1, value1)) {
-                        // file1 is exhausted, write the remaining values from file2
-                        out << value2 << '\n';
-                        while (getline(file2, value2)) {
-                            out << value2 << '\n';
-                        }
-                        break;
-                    }
-
-                } else {
+                // Try to read the next value from file1
+                if (!getline(file1, value1)) {
+                    // file1 is exhausted, write the remaining values from file2 and break
                     out << value2 << '\n';
-
-                    // Try to read the next value from file2
-                    if (!getline(file2, value2)) {
-                        // file2 is exhausted, write the remaining values from file1
-                        out << value1 << '\n';
-                        while (getline(file1, value1)) {
-                            out << value1 << '\n';
-                        }
-                        break;
+                    while (getline(file2, value2)) {
+                        out << value2 << '\n';
                     }
+                    break;
+                }
+
+            } else {
+                out << value2 << '\n';
+
+                // Try to read the next value from file2
+                if (!getline(file2, value2)) {
+                    // file2 is exhausted, write the remaining values from file1 and break
+                    out << value1 << '\n';
+                    while (getline(file1, value1)) {
+                        out << value1 << '\n';
+                    }
+                    break;
                 }
             }
         }
-
-        // Close the files
-        file1.close();
-        file2.close();
-        out.close();
     }
 
     void merge_sort_file(const std::string& file) {
