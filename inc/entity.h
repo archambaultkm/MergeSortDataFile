@@ -33,7 +33,8 @@ public:
             return op(get_attribute(m_sort_field), other.get_attribute(m_sort_field));
 
         } catch (const std::out_of_range&) {
-            // Consider uninitialized entities, or those without data at that key, less than
+            // Consider uninitialized entities, or those without data at that key, something.
+            // This should never be reached, just a safeguard.
             return true;
         }
     }
@@ -58,9 +59,6 @@ public:
 
     // Overload << operator to print all attributes
     friend std::ostream& operator<<(std::ostream& os, const Entity& entity);
-
-    // Overload the extraction operator
-    friend std::istream& operator>>(std::istream& is, const Entity& entity);
 
     // Overload std::getline to extract data from a stream into an Entity
     friend std::istream& getline(std::istream& is, Entity& entity);

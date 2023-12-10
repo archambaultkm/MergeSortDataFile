@@ -2,8 +2,8 @@
 // Created by Kaitlyn Archambault on 2023-11-28.
 //
 
-#ifndef ASSIGNMENT4_MERGE_SORT_H
-#define ASSIGNMENT4_MERGE_SORT_H
+#ifndef ASSIGNMENT4_SORT_H
+#define ASSIGNMENT4_SORT_H
 
 #include <string>
 #include <fstream>
@@ -12,7 +12,7 @@
 #include "../inc/utils.h"
 #include "../inc/entity.h"
 
-namespace sort {
+namespace ext_sort {
     // Split input in half and write to temporary files
     bool split_file(const std::string& in_file, const std::string& temp_filename1, const std::string& temp_filename2);
 
@@ -23,4 +23,4 @@ namespace sort {
     void merge_sort_file(const std::string& file);
 }
 
-#endif //ASSIGNMENT4_MERGE_SORT_H
+#endif //ASSIGNMENT4_SORT_H

@@ -91,17 +91,3 @@ std::istream& getline(std::istream& is, Entity& entity) {
 
     return is;
 }
-
-//// Overload the extraction operator
-//std::istream& operator>>(std::istream& is, const Entity& entity) {
-//    int key = entity.m_attributes.size();
-//    std::string value;
-//
-//    while (getline(is, entity, '\t')) {
-//        // Increment key for each value
-//        entity.set_attribute(key, value);
-//        key++;
-//    }
-//
-//    return is;
-//}

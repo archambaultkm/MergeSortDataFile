@@ -3,7 +3,7 @@
 #include "inc/colours.h"
 #include "inc/utils.h"
 #include "inc/entity.h"
-#include "inc/merge_sort.h"
+#include "inc/sort.h"
 #include "inc/timer.h"
 
 using std::string;
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 
     // Perform and time merge sort on the specified file
     Timer<> timer;
-    timer.measure_function_time([&]() { sort::merge_sort_file(file_to_sort); });
+    timer.measure_function_time([&]() { ext_sort::merge_sort_file(file_to_sort); });
 
     // Print the elapsed time for the sorting process
     cout << "Sort took " << timer.get_elapsed_time_s() << " second(s). " << endl;

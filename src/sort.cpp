@@ -2,12 +2,12 @@
 // Created by Kaitlyn Archambault on 2023-11-28.
 //
 
-#include "../inc/merge_sort.h"
+#include "../inc/sort.h"
 
 #include <string>
 #include <fstream>
 
-namespace sort {
+namespace ext_sort {
     // Split input in half and write to temporary files
     bool split_file(const std::string &in_file, const std::string &temp_filename1, const std::string &temp_filename2) {
         std::ofstream temp_file1(temp_filename1);

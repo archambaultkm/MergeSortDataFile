@@ -11,5 +11,5 @@ add_executable(sort
         src/utils.cpp
         inc/entity.h
         src/entity.cpp
-        inc/merge_sort.h
-        src/merge_sort.cpp)
+        inc/sort.h
+        src/sort.cpp)
