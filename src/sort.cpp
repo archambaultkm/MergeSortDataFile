@@ -63,7 +63,7 @@ namespace ext_sort {
         }
 
         // loop until one of the files is exhausted
-        while (true) {
+        while (!file1.eof() || !file2.eof()) {
             // Compare values from both files and write the smaller one to the output file first
             if (value1 <= value2) {
                 out << value1 << '\n';
@@ -75,7 +75,6 @@ namespace ext_sort {
                     while (getline(file2, value2)) {
                         out << value2 << '\n';
                     }
-                    break;
                 }
 
             } else {
@@ -88,7 +87,6 @@ namespace ext_sort {
                     while (getline(file1, value1)) {
                         out << value1 << '\n';
                     }
-                    break;
                 }
             }
         }
