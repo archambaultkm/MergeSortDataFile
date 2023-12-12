@@ -97,24 +97,15 @@ namespace ext_sort {
         std::string temp_filename1 = create_temp_file();
         std::string temp_filename2 = create_temp_file();
 
-        try {
-            // Split input into two batches and write to temporary files
-            if (split_file(file, temp_filename1, temp_filename2)) {
-                // if the file needs to be split further, recursively merge sort the two halves of the file
-                merge_sort_file(temp_filename1);
-                merge_sort_file(temp_filename2);
-            }
-
-            // Merge batches using temporary files
-            merge_files(file, temp_filename1, temp_filename2);
-
-        } catch (std::exception &e) {
-            // Make sure files are removed if program throws an exception
-            std::remove(temp_filename1.c_str());
-            std::remove(temp_filename2.c_str());
-
-            std::cout << e.what() << std::endl;
+        // Split input into two batches and write to temporary files
+        if (split_file(file, temp_filename1, temp_filename2)) {
+            // if the file needs to be split further, recursively merge sort the two halves of the file
+            merge_sort_file(temp_filename1);
+            merge_sort_file(temp_filename2);
         }
+
+        // Merge batches using temporary files
+        merge_files(file, temp_filename1, temp_filename2);
 
         // Clean up temporary files
         std::remove(temp_filename1.c_str());
