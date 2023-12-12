@@ -23,10 +23,10 @@ private:
     typename Clock::time_point m_duration;
 
     struct ElapsedTime {
-        long value;
-        const char* unit;
+        long m_value;
+        const char* m_unit;
 
-        ElapsedTime(long val, const char* u) : value(val), unit(u) {}
+        ElapsedTime(long val, const char* u) : m_value(val), m_unit(u) {}
     };
 
 public:

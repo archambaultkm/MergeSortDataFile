@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // initialize file and Entity sorting field from validated arguments
+    // initialize file and sorting field from validated arguments
     string file_to_sort = argv[1];
     int sort_field = parse_int_from_char(argv[2]);
 
@@ -37,10 +37,12 @@ int main(int argc, char* argv[]) {
 
     // Perform and time merge sort on the specified file
     Timer<> timer;
-    timer.measure_function_time([&]() { ext_sort::merge_sort_file(file_to_sort, sort_field); });
+    timer.measure_function_time([&]() {
+        ext_sort::merge_sort_file(file_to_sort, sort_field);
+    });
 
     // Print the elapsed time for the sorting process
-    cout << "Sort took " << timer.get_elapsed_time().value << " " << timer.get_elapsed_time().unit << endl;
+    cout << "Sort took " << timer.get_elapsed_time().m_value << " " << timer.get_elapsed_time().m_unit << endl;
 
     return 0;
 }
